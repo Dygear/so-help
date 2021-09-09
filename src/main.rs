@@ -34,6 +34,11 @@ fn main() {
             <WeDontClose This>
         </Project>
     "##;
-    let messedup: Project = from_reader(malformed.as_bytes()).unwrap();
+    let messedup: Project = match from_reader(malformed.as_bytes())
+    {
+        Ok(v) => v,
+        Err(e) => println!("Error reading malformed xml {:?}", e),
+    };
+
     println!("{:#?}", messedup);
 }
